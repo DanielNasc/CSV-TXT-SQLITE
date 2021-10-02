@@ -3,6 +3,7 @@ import sys
 
 from write_txt import write_txt
 from write_sqlite import create_table, insert_into, close
+from prompt_user import select_csv_file
 
 def main():
     # know what the unwanted fieldnames are
@@ -10,8 +11,10 @@ def main():
     # del "index.py"
     del argv[0]
 
+    filename = select_csv_file()
+
     # open csv file as a dict
-    with open("file.csv") as file:
+    with open(filename) as file:
         reader = csv.DictReader(file)
 
         # to count how many times a value is repeated

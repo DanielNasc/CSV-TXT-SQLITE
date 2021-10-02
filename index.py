@@ -2,7 +2,7 @@ import csv
 import sys
 
 from write_txt import write_txt
-from write_sqlite import create_table
+from write_sqlite import create_table, insert_into, close
 
 def main():
     # know what the unwanted fieldnames are
@@ -16,8 +16,7 @@ def main():
 
         # to count how many times a value is repeated
         values_counter = {}
-
-        create_table(reader.fieldnames)
+        create_table(reader.fieldnames, argv)
 
         # put the names of the desired fieldnames in the dict and ignore the unwanted ones
         for field in reader.fieldnames:
@@ -27,6 +26,7 @@ def main():
 
         # read row by row of csv
         for row in reader:
+            insert_into(row, argv)
             # read field by field of the row
             for field in row:
 
@@ -41,7 +41,7 @@ def main():
                 values_counter[field][row[field]] += 1
         
 
-        # write the analytics obtained in a txt file
+        close()
         write_txt(values_counter)
 
 # call main

@@ -17,19 +17,15 @@ def select_csv_file():
     return csv_files[menu_entry_index]
 
 def get_ignored_values(values):
-    values.insert(0, "CONTINUE...")
     print("SELECT VALUES TO IGNORE")
-    ignored_values = []
-    while True:
-        values_menu = TerminalMenu(values)
-        menu_entry_index = values_menu.show()
-        if menu_entry_index == 0:
-            del values[0]
-            break
-        ignored_values.append(values[menu_entry_index])
-        values.pop(menu_entry_index)
+    values_menu = TerminalMenu(values, multi_select=True, show_multi_select_hint=True, multi_select_select_on_accept=False, multi_select_empty_ok=True)
+    values_menu.show()
+    ignored_values = values_menu.chosen_menu_entries or []
 
     return ignored_values
 
 def get_table_name():
     return sanitize(input("Name the table: "))
+
+def get_columns_and_datatypes(fieldnames):
+    return

@@ -3,7 +3,7 @@ import sys
 
 from write_txt import write_txt
 from write_sqlite import create_table, insert_into, close_db
-from prompt_user import select_csv_file, get_ignored_values
+from prompt_user import select_csv_file, get_ignored_values, get_table_name
 
 def main():
     filename = select_csv_file()
@@ -19,7 +19,9 @@ def main():
         ignored_values = get_ignored_values(reader.fieldnames.copy())
         # to count how many times a value is repeated
         values_counter = {}
-        create_table(reader.fieldnames, ignored_values)
+
+        table_name = get_table_name()
+        create_table(table_name, reader.fieldnames, ignored_values)
         # put the names of the desired fieldnames in the dict and ignore the unwanted ones
         for field in reader.fieldnames:
             if field in ignored_values:
@@ -43,6 +45,8 @@ def main():
                 values_counter[field][row[field]] += 1
         
 
+        print("SUCESS!")
+        print("The name of your table is: "+table_name)
         close_db()
         write_txt(values_counter)
 

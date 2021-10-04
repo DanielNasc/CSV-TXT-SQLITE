@@ -1,6 +1,8 @@
 import os
 from simple_term_menu import TerminalMenu
 
+from sanitize import sanitize
+
 def select_csv_file():
     # get the name of csv files
     all_files = os.listdir()
@@ -28,3 +30,6 @@ def get_ignored_values(values):
         values.pop(menu_entry_index)
 
     return ignored_values
+
+def get_table_name():
+    return sanitize(input("Name the table: "))

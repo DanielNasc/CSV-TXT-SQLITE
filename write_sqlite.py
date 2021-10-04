@@ -16,10 +16,8 @@ def create_table(table_name, fieldnames, ignored_values):
 
     columns = ""
     for fieldname in fieldnames:
-        if fieldname in ignored_values:
-            continue
         new_str = sanitize(fieldname)
-        columns += f", {new_str} TEXT"
+        columns += f", {new_str} {fieldnames[fieldname]}"
     
     command = f"CREATE TABLE {table_name} (id INTEGER PRIMARY KEY{columns})"
     cur.execute(command)

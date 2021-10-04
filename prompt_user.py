@@ -27,5 +27,37 @@ def get_ignored_values(values):
 def get_table_name():
     return sanitize(input("Name the table: "))
 
-def get_columns_and_datatypes(fieldnames):
-    return
+def get_columns_and_datatypes(fieldnames, ignored_values):
+    fields_and_types = {}
+    
+    fieldnames = [f for f in fieldnames if f not in ignored_values]
+
+    for f in fieldnames:
+        fields_and_types[f] = "TEXT"
+
+    y_n = ["Yes", "No"]
+    y_n_menu = TerminalMenu(y_n)
+    y_n_index = y_n_menu.show()
+
+    if y_n[y_n_index] == "Yes":
+        fieldnames.insert(0, "CONTINUE.....")
+        update_types(fieldnames, fields_and_types)
+
+    print(fields_and_types)
+    return fields_and_types
+        
+
+def update_types(fieldnames, fields_and_types):
+    fields_menu = TerminalMenu(fieldnames)
+    field_index = fields_menu.show()
+    if field_index == 0:
+        return
+
+    datatypes = ["INTEGER", "NULL", "REAL", "BLOB"]
+    datatypes_menu = TerminalMenu(datatypes)
+    datatype_index = datatypes_menu.show()
+
+    fields_and_types[fieldnames[field_index]] = datatypes[datatype_index]
+
+    del fieldnames[field_index]
+    update_types(fieldnames, fields_and_types)

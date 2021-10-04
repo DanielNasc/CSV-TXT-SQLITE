@@ -29,7 +29,7 @@ def insert_into(columns, ignored_values):
     cur.execute(command, columns_values)
     con.commit()
 
-def close():
+def close_db():
     cur.close()
 
 def sanitize(text):

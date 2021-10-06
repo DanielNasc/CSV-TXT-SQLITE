@@ -22,7 +22,7 @@ def main():
 
         columns_and_datatypes = get_columns_and_datatypes(reader.fieldnames.copy(), ignored_values)
         table_name = get_table_name()
-        create_table(table_name, columns_and_datatypes, ignored_values)
+        create_table(table_name, columns_and_datatypes)
         # put the names of the desired fieldnames in the dict and ignore the unwanted ones
         for field in reader.fieldnames:
             if field in ignored_values:

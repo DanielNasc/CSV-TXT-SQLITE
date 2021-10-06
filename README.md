@@ -2,6 +2,8 @@
 I'm making a program that converts CSV files to SQLite, as well as creating a txt file with analytics
 
 ## Usage
+Create a folder called result in project root.
+
 Put a csv file in the same program folder and run:
 ```
 python3 index.py

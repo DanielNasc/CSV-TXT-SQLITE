@@ -17,7 +17,7 @@ def select_csv_file():
     return csv_files[menu_entry_index]
 
 def get_ignored_values(values):
-    print("SELECT VALUES TO IGNORE")
+    print("Select values to ignore:")
     values_menu = TerminalMenu(values, multi_select=True, show_multi_select_hint=True, multi_select_select_on_accept=False, multi_select_empty_ok=True)
     values_menu.show()
     ignored_values = values_menu.chosen_menu_entries or []
@@ -25,7 +25,7 @@ def get_ignored_values(values):
     return ignored_values
 
 def get_table_name():
-    return sanitize(input("Name the table: "))
+    return sanitize(input("Name the table:\t"))
 
 def get_columns_and_datatypes(fieldnames, ignored_values):
     fields_and_types = {}
@@ -35,6 +35,7 @@ def get_columns_and_datatypes(fieldnames, ignored_values):
     for f in fieldnames:
         fields_and_types[f] = "TEXT"
 
+    print("Do you want to change the datatype of a column? (default = TEXT)")
     y_n = ["Yes", "No"]
     y_n_menu = TerminalMenu(y_n)
     y_n_index = y_n_menu.show()
@@ -43,7 +44,6 @@ def get_columns_and_datatypes(fieldnames, ignored_values):
         fieldnames.insert(0, "CONTINUE.....")
         update_types(fieldnames, fields_and_types)
 
-    print(fields_and_types)
     return fields_and_types
         
 

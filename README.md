@@ -23,3 +23,5 @@ python3 index.py
 * https://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string
 * https://www.w3schools.com/python/python_variables_global.asp
 * https://stackoverflow.com/questions/19819907/python-using-del-in-for-loops
+* https://sparrow.dev/object-spread-operator-python/
+* https://stackoverflow.com/questions/47875815/is-there-an-object-spread-syntax-in-python-2-7x-like-in-javascript

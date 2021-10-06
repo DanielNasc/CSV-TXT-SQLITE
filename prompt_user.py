@@ -40,17 +40,12 @@ def get_columns_and_datatypes(fieldnames, ignored_values):
         fields_and_types[f] = "TEXT"
 
     # =======================
-    print("Do you want to change the datatype of a column? (default = TEXT)")
-    y_n = ["Yes", "No"]
-    y_n_menu = TerminalMenu(y_n)
-    y_n_index = y_n_menu.show()
-
-    if y_n[y_n_index] == "Yes":
+    if check_yes_no("Do you want to change the datatype of a column? (default = TEXT)") == "Yes":
         # add a CONTINUE option
         fieldnames.insert(0, "CONTINUE.....")
-
         update_types(fieldnames, fields_and_types)
 
+    fields_and_types = select_primary_key(fieldnames, fields_and_types)
     return fields_and_types
         
 
@@ -73,3 +68,19 @@ def update_types(fieldnames, fields_and_types):
     del fieldnames[field_index]
     # call this function again while the chosen option is not "CONTINUE"
     update_types(fieldnames, fields_and_types)
+
+def select_primary_key(fieldnames, fields_and_types):
+    if check_yes_no("Do you want to select a column to be the PRIMARY KEY? (default = id INTEGER)") == "Yes":
+        fields_menu = TerminalMenu(fieldnames)
+        field_index = fields_menu.show()
+        fields_and_types[fieldnames[field_index]] += " PRIMARY KEY"
+    else:
+        fields_and_types = {"id": "INTEGER PRIMARY KEY", **fields_and_types}
+    return fields_and_types
+
+def check_yes_no(text):
+    print(text)
+    y_n = ["Yes", "No"]
+    y_n_menu = TerminalMenu(y_n)
+    y_n_index = y_n_menu.show()
+    return y_n[y_n_index]

@@ -13,15 +13,14 @@ def create_table(table_name, fieldnames):
     table = table_name
 
     connect_to_db()
-
     # create a string with the given names and types, concatenating them
     columns = ""
     for fieldname in fieldnames:
         new_fieldname = sanitize(fieldname)
-        columns += f", {new_fieldname} {fieldnames[fieldname]}"
+        columns += f"{new_fieldname} {fieldnames[fieldname]},"
     
     # create a sql command dynamically
-    command = f"CREATE TABLE {table_name} (id INTEGER PRIMARY KEY{columns})"
+    command = f"CREATE TABLE {table_name} ({columns[:-1]})"
     cur.execute(command)
 
 def insert_into(columns, ignored_values):
@@ -37,7 +36,7 @@ def insert_into(columns, ignored_values):
         placeholders += "?,"
         columns_values.append(columns[column])
 
-    command = f"INSERT INTO {table} ({column_names[:-1]}) VALUES({placeholders[:-1]})"
+    command = f"INSERT OR REPLACE INTO {table} ({column_names[:-1]}) VALUES({placeholders[:-1]})"
     cur.execute(command, columns_values)
     con.commit()
 

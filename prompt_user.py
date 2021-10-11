@@ -5,7 +5,7 @@ from sanitize import sanitize
 
 def select_csv_file():
     # get the name of csv files
-    all_files = os.listdir()
+    all_files = sorted(os.listdir())
     csv_files = []
     for file in all_files:
         if file[-4:] == ".csv":
@@ -55,6 +55,7 @@ def update_types(fieldnames, fields_and_types):
     
     # if the selected option is "CONTINUE", stop recursion
     if field_index == 0:
+        del fieldnames[0]
         return
 
     # select new datatype

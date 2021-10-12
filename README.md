@@ -43,7 +43,7 @@ python3 index.py
 
 ## A little curiosity
 
-I first thought about creating a chat application that would run in the terminal, but I ended up making only a part of the API:
+I first thought about creating a chat application that would run in the terminal, but I ended up making only a part of the API: https://github.com/DanielNasc/CANCELED-CS50-2020-final-project
 
 
 #### THIS WAS CS50
